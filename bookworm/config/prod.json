@@ -1,0 +1,13 @@
+{
+    "logging": {
+        "log_level": "INFO"
+    },
+    "usb": {
+        "subsystem": "usb",
+        "vendor_id": "072f",
+        "product_id": "2200"
+    },
+    "nfc": {
+        "presence_check_interval": 0.1
+    }
+}

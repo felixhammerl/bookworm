@@ -1,0 +1,47 @@
+[project]
+name = "bookworm"
+version = "0.0.1"
+description = ""
+authors = [
+    {name = "Felix Hammerl",email = "felix.hammerl@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "nfcpy (>=1.0.4,<2.0.0)",
+    "structlog (>=25.1.0,<26.0.0)",
+    "python-json-logger (>=3.3.0,<4.0.0)",
+    "dacite (>=1.9.2,<2.0.0)",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.1.0"
+pytest = "^8.3.5"
+pytest-mock = "^3.14.0"
+pyhamcrest = "^2.1.0"
+black = "^25.1.0"
+matchmock = "^2.1.1"
+isort = "^6.0.1"
+docformatter = "^1.7.5"
+autoflake = "^2.3.1"
+bandit = "^1.8.3"
+pylint = "^3.3.4"
+poethepoet = "^0.33.0"
+
+[tool.black]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+
+[tool.docformatter]
+in-place = true
+black = true
+recursive = true
+
+[tool.pylint.options]
+disable = "useless-object-inheritance"

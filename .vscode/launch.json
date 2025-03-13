@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Test (Unit)",
+            "type": "debugpy",
+            "request": "launch",
+            "console": "integratedTerminal",
+            "module": "pytest",
+            "envFile": "${workspaceFolder}/.local.dec.env",
+            "args": [
+                "tests/unit"
+            ]
+        }
+    ]
+}
