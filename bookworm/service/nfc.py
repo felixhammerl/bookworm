@@ -1,12 +1,11 @@
+from pathlib import Path
+from threading import Timer
+from urllib.parse import unquote, urlparse
+
 import nfc
 
-from pathlib import Path
-
-
-from urllib.parse import unquote, urlparse
-from bookworm.util.logger import LogEvents, get_logger
 from bookworm.config import config
-from threading import Timer
+from bookworm.util.logger import LogEvents, get_logger
 
 log = get_logger()
 

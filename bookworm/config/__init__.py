@@ -15,8 +15,8 @@ class USB:
     """Configuration for USB."""
 
     subsystem: str
-    vendor_id: int
-    product_id: int
+    vendor_id: str
+    product_id: str
 
 
 @dataclass(frozen=True)
