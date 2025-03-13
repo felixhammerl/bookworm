@@ -25,6 +25,7 @@ class NFCReader:
             rdwr={
                 "on-connect": self.on_connect,
                 "on-release": self.on_release,
+                "beep-on-connect": False,
             }
         )
 
