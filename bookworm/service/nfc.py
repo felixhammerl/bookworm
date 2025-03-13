@@ -15,9 +15,7 @@ class NFCReader:
         self.card_present = card_present
         self.card_removed = card_removed
         self.reader = nfc.ContactlessFrontend()
-        if not self.reader.open(
-            f"{config.usb.subsystem}:{config.usb.vendor_id}:{config.usb.product_id}"
-        ):
+        if not self.reader.open("usb"):
             log.error(event=LogEvents.NFC_DEVICE_NOT_FOUND)
 
         log.info(event=LogEvents.NFC_DEVICE_INITIALIZED, device=self.reader.device)

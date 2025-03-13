@@ -20,6 +20,7 @@ async def main() -> int:
     card_present = lambda: log.warn(event=LogEvents.NFC_CARD_PRESENT)
     card_removed = lambda: log.warn(event=LogEvents.NFC_CARD_REMOVED)
     nfc_reader = NFCReader(card_present=card_present, card_removed=card_removed)
+    nfc_reader.connect()
     while RUN_FLAG:
         await asyncio.sleep(0.1)
     return 0

@@ -11,15 +11,6 @@ from dacite import from_dict
 
 
 @dataclass(frozen=True)
-class USB:
-    """Configuration for USB."""
-
-    subsystem: str
-    vendor_id: str
-    product_id: str
-
-
-@dataclass(frozen=True)
 class NFC:
     """Configuration for NFC."""
 
@@ -38,7 +29,6 @@ class Config:
     """Configuration for the application."""
 
     logging: Logging
-    usb: USB
     nfc: NFC
 
 
