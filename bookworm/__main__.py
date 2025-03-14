@@ -1,6 +1,7 @@
 import signal
 import asyncio
 from bookworm.service.nfc import NFCReader
+from bookworm.service.m3u import M3UPlayer
 from bookworm.util.logger import LogEvents, get_logger
 
 log = get_logger()
@@ -17,8 +18,11 @@ async def shutdown():
 async def main() -> int:
     global RUN_FLAG
     log.info(event=LogEvents.STARTUP)
-    card_present = lambda: log.warn(event=LogEvents.NFC_CARD_PRESENT)
-    card_removed = lambda: log.warn(event=LogEvents.NFC_CARD_REMOVED)
+
+    player = M3UPlayer()
+    card_present = lambda m3u: player.play(m3u)
+    card_removed = lambda: player.stop()
+
     nfc_reader = NFCReader(card_present=card_present, card_removed=card_removed)
     nfc_reader.connect()
     while RUN_FLAG:

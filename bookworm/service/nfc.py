@@ -34,6 +34,7 @@ class NFCReader:
         )
 
     def on_connect(self, tag: Tag):
+        self.card_present("/mnt/usb0/AC_DC/Back In Black/index.m3u")
         if not tag.ndef:
             log.warn(event=LogEvents.TAG_NO_NDEF_RECORDS)
             return True
