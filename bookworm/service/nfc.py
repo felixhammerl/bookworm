@@ -14,7 +14,6 @@ log = get_logger()
 
 class NFCReader:
     def __init__(self, card_present, card_removed):
-        self.is_running = False
         self.targets = [f"{config.nfc.target_bitrate}{config.nfc.target_nfc_type}"]
         self.card_present = card_present
         self.card_removed = card_removed
@@ -35,7 +34,6 @@ class NFCReader:
         )
 
     def on_connect(self, tag: Tag):
-        self.is_running = True
         if not tag.ndef:
             log.warn(event=LogEvents.TAG_NO_NDEF_RECORDS)
             return True
@@ -48,21 +46,21 @@ class NFCReader:
 
     def shutdown(self):
         log.info(event=LogEvents.NFC_DEVICE_SHUTDOWN)
-        self.is_running = False
+        self.timer.cancel()
         self.reader.close()
 
     def check_card_presence(self):
-        if not self.is_running:
-            return
-
         if self.reader.sense(*[RemoteTarget(t) for t in self.targets], iterations=1):
-            Timer(0.5, self.check_card_presence).start()
+            self.timer = Timer(0.5, self.check_card_presence)
+            self.timer.start()
             return
 
         log.info(event=LogEvents.NFC_TAG_REMOVED)
         self.card_removed()
-        Timer(0.5, self.connect).start()
+        self.timer = Timer(0.5, self.connect)
+        self.timer.start()
 
     def on_release(self, _):
-        Timer(0.5, self.check_card_presence).start()
+        self.timer = Timer(0.5, self.check_card_presence)
+        self.timer.start()
         return True
