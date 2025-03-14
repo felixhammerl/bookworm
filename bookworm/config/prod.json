@@ -10,6 +10,6 @@
     "nfc": {
         "presence_check_interval": 0.1,
         "target_bitrate": 106,
-        "nfc_type": "A"
+        "target_nfc_type": "A"
     }
 }
