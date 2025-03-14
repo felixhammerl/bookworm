@@ -23,6 +23,7 @@ async def main() -> int:
     nfc_reader.connect()
     while RUN_FLAG:
         await asyncio.sleep(0.1)
+    nfc_reader.shutdown()
     return 0
 
 

@@ -73,6 +73,7 @@ class LogEvents(Enum):
     NFC_DEVICE_NOT_FOUND = auto()
     NFC_DEVICE_INITIALIZED = auto()
     NFC_DEVICE_FAILED = auto()
+    NFC_DEVICE_SHUTDOWN = auto()
     NFC_TAG_CONNECTED = auto()
     NFC_TAG_REMOVED = auto()
     NFC_CARD_PRESENT = auto()
