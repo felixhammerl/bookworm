@@ -15,6 +15,8 @@ class NFC:
     """Configuration for NFC."""
 
     presence_check_interval: float
+    target_bitrate: int
+    target_nfc_type: str
 
 
 @dataclass(frozen=True)
