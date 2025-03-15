@@ -1,0 +1,14 @@
+[Unit]
+Description=bookworm
+After=multi-user.target
+
+[Service]
+WorkingDirectory=/home/pi/bookworm
+User=pi
+Group=pi
+Type=simple
+ExecStart=/home/pi/.local/bin/poetry run python -m bookworm
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -74,7 +74,7 @@ This should give an output like this:
 Bus 001 Device 011: ID 072f:2200 Advanced Card Systems, Ltd ACR122U
 ```
 
-Remember the `072f:2200` part. This is the first part is the vendor ID and the second the device ID. We need to add this to the udev rules.
+Remember the `072f:2200` part, just be aware that your values may be different! This is the first part is the vendor ID and the second the device ID. We need to add this to the udev rules.
 
 The following commands should do the trick:
 
@@ -108,11 +108,25 @@ I use NFC Tools for macOS and Android to write the NFC tags. The tags should con
 
 ## Let's go!
 
+To start it manually, run:
+
+
 ```bash
 poetry run python -m bookworm
 ```
 
-# On NFC
+To start it automatically upon device start, add it as a systemd service:
+
+```bash
+sudo cp bookworm.service /etc/systemd/system/bookworm.service
+sudo systemctl daemon-reload
+sudo systemctl start bookworm
+sudo systemctl enable bookworm
+```
+
+That's it! You should now be able to scan your NFC tags and listen to your audiobooks.
+
+# About NFC
 
 If you're as clueless as I am about NFC, here are some notes that might help you understand the NFC reader a bit better.
 
@@ -120,12 +134,12 @@ If you're as clueless as I am about NFC, here are some notes that might help you
 
 See: https://www.rfwireless-world.com/Terminology/NFC-A-vs-NFC-B-vs-NFC-F.html
 
-NFC-A
+### NFC-A
 The signalling type NFC-A is based on ISO/IEC 14443A. It is similar to RFID type A. In the type-A based communication delay encoding (miller encoding) technique is employed along with AM modulation. Here binary data is transmitted with the data rate of about 106 Kbps using type A communication. Here binary signal must change from 0 % to 100 % to distinguish between binary 1 and binary 0 data informations.
 
-NFC-B
+### NFC-B
 The signalling type NFC-B is based on ISO/IEC 14443B. It is similar to RFID type B. Here manchester encoding technique is employed. Here instead of 100%, AM modulationat 10% is used. This convention is used to distinguish between binary 1 and 0. 10% change from 90% for binay 0 (i.e. low) and 100% for binary 1 ( i.e high) is used.
 In manchester coding zero cross over happens in the bit period used to represent both 0 and 1. Here a low to high transition represents binary 0 bit and high to low transition represents binary 1 bit. It is recommended to have the zero cross over in the middle of the bit period.
 
-NFC-F
+### NFC-F
 The signalling type NFC-F is based on FeliCA JIS X6319-4. It is the faster form of RFID communication. It is alse known as FeliCa. It is the technology most popularly used in Japan. It is used for variety of applications such as creadit card or debit card based payments, subway ticketing for access control to the trains, personal identification at the office and residential flats etc.
