@@ -1,7 +1,8 @@
-import signal
 import asyncio
-from bookworm.service.nfc import NFCReader
+import signal
+
 from bookworm.service.m3u import M3UPlayer
+from bookworm.service.nfc import NFCReader
 from bookworm.util.logger import LogEvents, get_logger
 
 log = get_logger()

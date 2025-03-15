@@ -16,7 +16,8 @@ def get_error_response(
     method_name: str,  # pylint: disable=unused-argument
     event_dict: EventDict,
 ) -> EventDict:
-    """This function is used to extract the response text from a non-serializable error."""
+    """This function is used to extract the response text from a non-serializable
+    error."""
 
     error = event_dict.get("error", None)
     if error and isinstance(error, Exception):

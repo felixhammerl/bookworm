@@ -1,5 +1,5 @@
-import subprocess
 import signal
+import subprocess
 
 
 class M3UPlayer:

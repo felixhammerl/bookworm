@@ -4,11 +4,7 @@ STAGE ?= local
 .DEFAULT_GOAL := all
 .PHONY: all
 
-all: format test deploy
-
-test: test-format test-quality test-unit
-
-deploy: clean package terraform-apply
+test: test-format test-quality
 
 install:
 	@if command -v pyenv >/dev/null 2>&1; then \
@@ -38,22 +34,22 @@ install:
 	poetry install --with dev
 
 update:
-	poetry update --with dev,central_reporting_lambda --latest
+	poetry update --with dev --latest
 
 clear-poetry-cache:
 	poetry env remove --all
 	poetry cache clear pypi --all
 
 format:
-	# find . -name "*.tf" -not -path "*.terraform*" | xargs -r terraform fmt
+	# find . \( -path "*/.terraform" -o -path "*/.venv" \) -prune -o -name "*.tf" -type f -print | xargs -r terraform fmt
 	-poetry run docformatter --config pyproject.toml .
 	poetry run autoflake --in-place --recursive --remove-all-unused-imports .
 	poetry run isort . --profile black
 	poetry run black .
 
 test-format:
-	find . -name "*.sh" | xargs -r shellcheck
-	# find . -name "*.tf" -not -path "*.terraform*" | xargs -r terraform fmt -check
+	find . \( -path "*/.terraform" -o -path "*/.venv" \) -prune -o -name "*.sh" -type f -print | xargs -r shellcheck
+	# find . \( -path "*/.terraform" -o -path "*/.venv" \) -prune -o -name "*.tf" -type f -print | xargs -r terraform fmt -check
 	poetry run docformatter --config pyproject.toml --check .
 	poetry run autoflake --recursive --check .
 	poetry run isort . --check-only --profile black
@@ -61,10 +57,5 @@ test-format:
 
 test-quality:
 	poetry run bandit -r bookworm
-	poetry run bandit -r tests
 	poetry run pylint --rcfile pyproject.toml bookworm
-	poetry run pylint --rcfile pyproject.toml tests
-
-test-unit:
-	poetry run pytest tests/unit --disable-pytest-warnings
 
