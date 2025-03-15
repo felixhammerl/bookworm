@@ -34,14 +34,19 @@ class NFCReader:
         )
 
     def on_connect(self, tag: Tag):
-        self.card_present("/mnt/usb0/AC_DC/Back In Black/index.m3u")
         if not tag.ndef:
             log.warn(event=LogEvents.TAG_NO_NDEF_RECORDS)
             return True
 
-        log.info(event=LogEvents.NFC_TAG_CONNECTED, ndef_records=tag.ndef.records)
+        if len(tag.ndef.records) > 1:
+            log.warn(
+                event=LogEvents.NFC_TAG_TOO_MANY_NDEF_RECORDS,
+                ndef_records=tag.ndef.records,
+            )
 
-        file = Path(unquote(urlparse(tag.ndef.records[0].text).path))
+        log.info(event=LogEvents.NFC_TAG_CONNECTED, ndef_record=tag.ndef.records[0])
+
+        file = Path(unquote(urlparse(tag.ndef.records[0].data).path))
         self.card_present(file)
         return True
 

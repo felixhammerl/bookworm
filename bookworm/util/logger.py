@@ -78,6 +78,7 @@ class LogEvents(Enum):
     NFC_TAG_REMOVED = auto()
     NFC_CARD_PRESENT = auto()
     NFC_CARD_REMOVED = auto()
+    NFC_TAG_TOO_MANY_NDEF_RECORDS = auto()
     TAG_NO_NDEF_RECORDS = auto()
     TAG_NDEF_RECORD_PRESENT = auto()
     TAG_FILE_DOES_NOT_EXIST = auto()

@@ -92,9 +92,9 @@ This should give the user access to the device. You can check this by running th
 
 ## Playlist files
 
-They playlists for the audio books are simple m3u files. Put your MP3 and your m3u files in the `books` directory. The m3u file should contain the path to the MP3 files. The MP3 files should be in the same directory as the m3u file.
+They playlists for the audio books are simple m3u files. Put your MP3 and your m3u files on a USB stick. The m3u file should contain the path to the MP3 files. The MP3 files should be in the same directory as the m3u file.
 
-In order to make sure that your MP3 files are in the correct path, you can figure out the device and edit `/etc/fstab` to mount the device at the correct path. First, get the device identifier via `lsblk` and `blkid`. Then, add the device to the `/etc/fstab` file. Here is an example:
+In order to make sure that your MP3 files are in the correct path, you can figure out the device and edit `/etc/fstab` to mount the device at the correct path. First, get the device identifier via `lsblk` (to identify the device) and `blkid` (to get the UUID). Then, add the device to the `/etc/fstab` file. Here is an example:
 
 ```
 UUID=B11B-1E14 /mnt/usb0 vfat defaults,auto,users,rw,nofail,umask=000 0 0
@@ -104,7 +104,7 @@ Please be careful when editing the `/etc/fstab` file. Incorrect entries can lead
 
 ## NFC writing
 
-I use NFC Tools for macOS and Android to write the NFC tags. The tags should contain a single entry with a file URI, pointing to the m3u playlist file.
+I use NFC Tools for macOS and Android to write the NFC tags. The tags should contain a single NDEF entry with a file URI, pointing to the m3u playlist file.
 
 ## Let's go!
 
