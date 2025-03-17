@@ -1,6 +1,15 @@
 # Bookworm
 
-This project is a very simple audiobook reader. It is designed to be used with a Raspberry Pi and a NFC reader. The NFC reader is used to select the book to read. The book is read from an m3u playlist and played using the VLC player in a headless mode. The sound is played through the 3.5mm audio jack.
+This project is a very simple audiobook reader designed to be used by a kid with a single user interface:
+
+* You put the NFC tag on the reader, it starts playing the audiobook.
+* You take the NFC tag off the reader, it stops playing the audiobook.
+* For simplicity, the reader does not have any buttons or other controls.
+* The reader does not have a display or remember the last position in the audiobook. Happy to receive PRs for this feature.
+
+It is designed to be used with a Raspberry Pi and a NFC reader. The NFC reader is used to select the book to read. I use a ACR122U reader. The book is read from an m3u playlist and played using the VLC player in a headless mode. The sound is played through the 3.5mm audio jack.
+
+Regarding the cards, please take note to use NFC215 cards. These are the only ones that work with the ACR122U reader. I use the cards with NTAG215 chip from Amazon.
 
 # Getting Started
 
